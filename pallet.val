@@ -1,0 +1,36 @@
+ edit pallet
+ tool gripper
+    xgap = 82
+    ygap = 59
+    zthick = 15
+
+    signal 5
+    set pallet = frame(p01,px1,py1,p01)
+
+    appros pallet,50
+    openi
+    
+    for i = 0 to 2
+        for j = 0 to 1
+            ddx = xgap*i
+            ddy = ygap*j
+            set palletloc = shift(null by ddx,ddy,0)
+            
+            appro pallet:palletloc, 100
+            moves pallet:palletloc
+            closei
+            departs 100
+
+            set drop.loc = shift(goal by 0,0,zthick) 
+            
+            appro drop.loc, 100
+            moves drop.loc
+            openi
+            departs 100
+       end
+   end
+   
+ 
+ e
+load alltools.v2
+load ngph.lc
